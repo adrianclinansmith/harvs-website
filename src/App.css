@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  /* overscroll-behavior: contain; */
+  overflow-y: scroll;
 }
 
 .header {
@@ -25,9 +27,9 @@
 	font-size: 12px;
 }
 
-#content {
-	/* padding-top: 80px; */
-}
+/* #content {
+	text-align: center;
+} */
 
 .logo {
 	width: 165px;
@@ -44,15 +46,61 @@
 	}
 }
 
-#main-image {
+.home-image {
+	animation: 1s ease-out 0s 1 slideInFromLeft;
 	max-width:100%;
 	height:auto;
 	overflow-x: hidden;
 	display: block;
 }
 
-.animator {
-	animation: 1s ease-out 0s 1 slideInFromLeft;
+.card {
+	border: 1px solid gray;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+	background: url("Food.jpg") rgba(255, 255, 255, 0.8);
+	background-size: cover;
+	background-blend-mode: soft-light;
+}
+
+.card:hover {
+	transform: scale(1.01);
+	box-shadow: 2px 2px 5px black;
+}
+
+.card_content {
+	margin: 5% 10%;
+	font-family: Futura, sans-serif;
+	font-size: 20px;
+}
+
+.card_content > p {
+	line-height: 1.2;   /* line height within paragraph */
+  	margin-bottom: 1.5; /* line height between paragraphs */
+}
+
+.how-it-works-content {
+	color: #524b4b;
+	font-family: "Century Gothic", sans-serif;
+	font-size: 24px;
+	font-weight: lighter;
+	font-style: normal;
+	text-align: start;
+	padding: 50px 10%;
+}
+
+.order-now-content {
+  	justify-items: center; 
+	display: grid;
+	gap: 25px;
+	grid-template-columns: repeat(3, 1fr);
+	/* background-color: gray; */
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	overflow: hidden;
 }
 
 .nav-link {
