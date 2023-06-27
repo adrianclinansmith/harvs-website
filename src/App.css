@@ -1,8 +1,43 @@
 .App {
   text-align: center;
-  /* overscroll-behavior: contain; */
   overflow-y: scroll;
+  font-family: Futura, sans-serif;
 }
+
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Banner
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+@keyframes carousel {
+    0%   { transform: translate(0); }
+	40%	 { transform: translate(0); }
+	50%	 { transform: translate(-100vw); }
+	90%	 { transform: translate(-100vw); }
+    100% { transform: translate(-200vw); }
+}
+
+.banner {
+	background-color: rgb(247, 130, 35);
+	height: 40px;
+	width: 100vw;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.banner_item {
+	/* duration | easing-function | delay | iteration | fille-mode | name */
+	animation: 15s linear 0s infinite carousel;
+	display: flex;           /* Center inner content */
+	align-items: center;     /* Center inner content */
+	justify-content: center; /* Center inner content */
+	flex-shrink: 0;
+	height: inherit;
+	width: inherit;
+}
+
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Header
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .header {
   background-color: white;
@@ -16,43 +51,66 @@
   box-shadow: 0 0.5px;
 }
 
-.banner {
-	background-color: rgb(247, 130, 35);
-	height: 40px;
-	display: flex;
-  	justify-content: center;
-  	flex-direction: column;
-	color: #5c5c5c;
-	font-family: Futura, sans-serif;
-	font-size: 12px;
-}
-
-/* #content {
-	text-align: center;
-} */
-
 .logo {
 	width: 165px;
 }
 
-@keyframes slideInFromLeft {
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Home 
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+@keyframes shrinkAndFadeIn {
 	0% {
 		transform: matrix(1.1, 0, 0, 1.1, 0, 0);
 		opacity: 0;
 	}
 	100% {
 		transform: matrix(1, 0, 0, 1, 0, 0);
+		opacity: 0.3;
+	}
+}
+
+@keyframes riseAndFadeIn {
+	0% {
+		transform: translate(0, 10px);
+		opacity: 0;
+	}
+	100% {
+		transform: translate(0, 0);
 		opacity: 1;
 	}
 }
 
-.home-image {
-	animation: 1s ease-out 0s 1 slideInFromLeft;
-	max-width:100%;
-	height:auto;
+.home-subheader {
+	background-color: black;
 	overflow-x: hidden;
+	overflow-y: hidden;
+	position: relative; /* Needed for positioning absolute content (why?) */
+}
+
+.home-subheader_image {
+	/* duration | easing-function | delay | iteration | fille-mode | name */
+	animation: 1s ease-out 0s 1 forwards shrinkAndFadeIn;
+	max-width: 100%;
+	/* height: auto; */
 	display: block;
 }
+
+.home-subheader_content {
+	animation: 1s ease-out 0.8s 1 both riseAndFadeIn;
+	color: white;
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	height: fit-content;
+}
+
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Other 
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .card {
 	border: 1px solid gray;
@@ -71,7 +129,6 @@
 
 .card_content {
 	margin: 5% 10%;
-	font-family: Futura, sans-serif;
 	font-size: 20px;
 }
 
@@ -105,7 +162,6 @@
 
 .nav-link {
 	color: #5c5c5c;
-	font-family: Futura, sans-serif;
 	font-size: 15px;
 	margin-left: 20px;
 	margin-right: 20px;

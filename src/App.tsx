@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from './TheVegCultureLogo.jpg';
-import vegImage from "./TheVegWeAreClosed.png";
+import logo from './images/TheVegCultureLogo.jpg';
+import homeImage from "./images/HomeBackground.png";
 import './App.css';
 
 function App() {
@@ -8,7 +8,17 @@ function App() {
 	return (
 		<div className="App">
 			<div className="banner">
-				FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
+				<div className="banner_item">
+					FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
+				</div>
+				<div className="banner_item">
+					FRESH MADE INDIAN FOOD DELIVERED TO YOUR DOOR MONDAY TO 
+					FRIDAY FOR AS LOW AS $160/MONTH!
+				</div>
+				{/* Repeat first element for infinite carousel in CSS */}
+				<div className="banner_item">
+					FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
+				</div>
 			</div>
 			<header className="header">
 				<img src={logo} className="logo" alt="" />
@@ -35,8 +45,9 @@ function App() {
 	);
 }
 
-
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Helper Components
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 interface NavLinkProps extends React.PropsWithChildren {
 	setContent: React.Dispatch<React.SetStateAction<string>>;
@@ -62,15 +73,23 @@ function Card({ children }: React.PropsWithChildren) {
 	);
 }
 
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Page Content Components
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 function Home() {
-	return (
-		<div>
-			<img className="home-image" src={vegImage} alt="" />
-				stuff here
+	return (<>
+		<div className="home-subheader">
+			<img className="home-subheader_image" src={homeImage} alt="" />
+			<div className="home-subheader_content">
+				<h4>Home-style, Traditional, Delicious</h4>
+				<h1>
+					Indian Cuisine Prepared Fresh & Delivered to Doorstep
+				</h1>
+			</div>
 		</div>
-	);
+		<p>stuff here</p>
+	</>);
 }
 
 function OrderNow() {
