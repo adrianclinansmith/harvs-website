@@ -22,14 +22,15 @@ Banner
 	width: 100vw;
     display: flex;
     flex-wrap: nowrap;
+	overflow: hidden;
 }
 
 .banner_item {
 	/* duration | easing-function | delay | iteration | fille-mode | name */
 	animation: 15s linear 0s infinite carousel;
-	display: flex;           /* Center inner content */
-	align-items: center;     /* Center inner content */
-	justify-content: center; /* Center inner content */
+	display: flex;           /* Center content */
+	align-items: center;     /* Center content */
+	justify-content: center; /* Center content */
 	flex-shrink: 0;
 	height: inherit;
 	width: inherit;
@@ -53,6 +54,30 @@ Header
 
 .logo {
 	width: 165px;
+}
+
+.nav-link {
+	color: #5c5c5c;
+	font-size: 15px;
+	margin-left: 20px;
+	margin-right: 20px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Content
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+.text-block {
+	color: #524b4b;
+	font-family: "Century Gothic", sans-serif;
+	font-size: 24px;
+	font-weight: lighter;
+	font-style: normal;
+	text-align: start;
+	padding: 50px 10%;
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -86,6 +111,7 @@ Home
 	overflow-x: hidden;
 	overflow-y: hidden;
 	position: relative; /* Needed for positioning absolute content (why?) */
+	text-align: center;
 }
 
 .home-subheader_image {
@@ -137,16 +163,6 @@ Other
   	margin-bottom: 1.5; /* line height between paragraphs */
 }
 
-.how-it-works-content {
-	color: #524b4b;
-	font-family: "Century Gothic", sans-serif;
-	font-size: 24px;
-	font-weight: lighter;
-	font-style: normal;
-	text-align: start;
-	padding: 50px 10%;
-}
-
 .order-now-content {
   	justify-items: center; 
 	display: grid;
@@ -158,14 +174,4 @@ Other
 	margin-right: auto;
 	width: 80%;
 	overflow: hidden;
-}
-
-.nav-link {
-	color: #5c5c5c;
-	font-size: 15px;
-	margin-left: 20px;
-	margin-right: 20px;
-	border: none;
-	background-color: transparent;
-	cursor: pointer;
 }
