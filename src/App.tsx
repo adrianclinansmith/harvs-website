@@ -71,37 +71,6 @@ function NavLink({ children, setContent }: NavLinkProps) {
 	);
 }
 
-// function Card({ children }: React.PropsWithChildren) {
-// 	return (
-// 		<div className="card">
-// 			<div className="card_content">
-// 				{children}
-// 			</div>
-
-// 			<input type="radio" name="meal-plan" value="month"
-// 				onChange={(e) => 
-// 					console.log(`monthly: ${e.currentTarget.checked}`)
-// 				}
-// 			/>
-// 			<label htmlFor="child">$160 for the month</label><br />
-
-// 			<input type="radio" name="meal-plan" value="week"
-// 				onChange={(e) => 
-// 					console.log(`weekly: ${e.currentTarget.checked}`)
-// 				} 
-// 			/>
-// 			<label htmlFor="adult">$50 for the week</label><br />
-
-// 			<input type="radio" name="meal-plan" value="day"
-// 				onChange={(e) => 
-// 					console.log(`daily: ${e.currentTarget.checked}`)
-// 				} 
-// 			/>
-// 			<label htmlFor="senior">$12 for the day.</label>
-// 		</div>
-// 	);
-// }
-
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Content Components
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
