@@ -1,10 +1,15 @@
 import { useState } from "react";
 
-enum TimeSpan {
-	month = "month",
-	week = "week",
-	day = "day"
-}
+type TimeSpan = "month" | "week" | "day";
+const MONTH = "month";
+const WEEK = "week";
+const DAY = "day";
+
+type AddOn = "chicken" | "rice" | "roti" | "extra on friday";
+const CHICKEN = "chicken";
+const RICE = "rice";
+const ROTI = "roti";
+const EXTRA_ON_FRIDAY = "extra on friday";
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Prices
@@ -12,29 +17,30 @@ enum TimeSpan {
 
 // Prices for each option. "Option 0" means nothing has been selected.
 const prices = [
-	{[TimeSpan.month]:   0, [TimeSpan.week]:  0, [TimeSpan.day]:  0}, // 0
-	{[TimeSpan.month]: 160, [TimeSpan.week]: 50, [TimeSpan.day]: 12}, // 1
-	{[TimeSpan.month]: 180, [TimeSpan.week]: 60, [TimeSpan.day]: 14}, // 2
-	{[TimeSpan.month]: 200, [TimeSpan.week]: 65, [TimeSpan.day]: 15}, // 3
-	{[TimeSpan.month]: 220, [TimeSpan.week]: 70, [TimeSpan.day]: 16}, // 4
-	{[TimeSpan.month]: 230, [TimeSpan.week]: 75, [TimeSpan.day]: 17}, // 5
-	{[TimeSpan.month]: 250, [TimeSpan.week]: 75, [TimeSpan.day]: 17}  // 6
+	{ [MONTH]:   0, [WEEK]:  0, [DAY]:  0 }, // 0
+	{ [MONTH]: 160, [WEEK]: 50, [DAY]: 12 }, // 1
+	{ [MONTH]: 180, [WEEK]: 60, [DAY]: 14 }, // 2
+	{ [MONTH]: 200, [WEEK]: 65, [DAY]: 15 }, // 3
+	{ [MONTH]: 220, [WEEK]: 70, [DAY]: 16 }, // 4
+	{ [MONTH]: 230, [WEEK]: 75, [DAY]: 17 }, // 5
+	{ [MONTH]: 250, [WEEK]: 75, [DAY]: 17 }  // 6
 ];
 // Prices for add-ons
 const addOnPrices = {
-	"chicken":{[TimeSpan.month]: 40, [TimeSpan.week]: 20,  [TimeSpan.day]: 10},
-	"rice":   {[TimeSpan.month]: 30, [TimeSpan.week]: 7.5, [TimeSpan.day]: 1.5},
-	"roti":   {[TimeSpan.month]: 20, [TimeSpan.week]: 5,   [TimeSpan.day]: 1}
+	[CHICKEN]:         { [MONTH]: 40, [WEEK]: 20,  [DAY]: 10 },
+	[RICE]:            { [MONTH]: 30, [WEEK]: 7.5, [DAY]: 1.5 },
+	[ROTI]:            { [MONTH]: 20, [WEEK]: 5,   [DAY]: 1 },
+	[EXTRA_ON_FRIDAY]: [0, 32, 36, 40, 44, 44, 50]
 };
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-// Component
+// OrderNow Component
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 export default function OrderNow() {
 	// States
 	const [option, setOption] = useState(0);
-	const [time, setTime] = useState(TimeSpan.month);
+	const [time, setTime] = useState<TimeSpan>(MONTH);
 	const [addChicken, setAddChicken] = useState(false);
 	const [addRice, setAddRice] = useState(false);
 	const [addRoti, setAddRoti] = useState(false);
@@ -97,27 +103,39 @@ export default function OrderNow() {
 
 		</div>
 		{/* Add Chicken */}
-		<AddOn 
-			item="chicken" 
+		<AddOnSelector 
+			item={CHICKEN}
+			option={option}
 			setChecked={setAddChicken}
 			time={time}
 		/>
 		{/* Add Rice */}
-		<AddOn 
-			item="rice" 
+		<AddOnSelector 
+			item={RICE} 
+			option={option}
 			setChecked={setAddRice}
 			time={time}
 		/>	
 		{/* Add Roti */}
-		<AddOn 
-			item="roti" 
+		<AddOnSelector 
+			item={ROTI}
+			option={option}
 			setChecked={setAddRoti}
 			time={time}
 		/>	
+		{/* Add One Extra Package on Fridays */}
+		<AddOnSelector 
+			item={EXTRA_ON_FRIDAY} 
+			option={option}
+			setChecked={setAddRoti}
+			time={time}
+		/>
 	</>);
 }
 
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Helper Components
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 interface CardProps extends React.PropsWithChildren {
 	option: number;
@@ -135,44 +153,58 @@ function Card({option, setOption, setTime, veg, children}: CardProps) {
 			</div>
 			{/* Monthly */}
 			<input type="radio" name="meal-plan" value="month"
-				onChange={() => {setOption(option); setTime(TimeSpan.month);}}
+				onChange={() => {setOption(option); setTime(MONTH);}}
 			/>
 			<label htmlFor="child">
-				${prices[option][TimeSpan.month]} for the month
+				${prices[option][MONTH]} for the month
 			</label><br />
 			{/* Weekly */}
 			<input type="radio" name="meal-plan" value="week"
-				onChange={() => {setOption(option); setTime(TimeSpan.week);}}
+				onChange={() => {setOption(option); setTime(WEEK);}}
 			/>
 			<label htmlFor="adult">
-				${prices[option][TimeSpan.week]} for the week
+				${prices[option][WEEK]} for the week
 			</label><br />
 			{/* Daily */}
 			<input type="radio" name="meal-plan" value="day"
-				onChange={() => {setOption(option); setTime(TimeSpan.day);}}
+				onChange={() => {setOption(option); setTime(DAY);}}
 			/>
 			<label htmlFor="senior">
-				${prices[option][TimeSpan.day]} for the day.
+				${prices[option][DAY]} for the day.
 			</label>
 		</div>
 	);
 }
 
-interface AddOnProps {
-	item: "chicken" | "rice" | "roti";
+interface AddOnSelectorProps {
+	item: AddOn;
+	option: number;
 	setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 	time: TimeSpan;
 }
 
-function AddOn({item, setChecked, time}: AddOnProps) {
+function AddOnSelector({item, option, setChecked, time}: AddOnSelectorProps) {
+	let text: string;
+	if (item !== EXTRA_ON_FRIDAY) {
+		text = `Add ${item} for $${addOnPrices[item][time]}`;
+	} 
+	else {
+		text = "Add one extra package every friday for $";
+		text += `${addOnPrices[EXTRA_ON_FRIDAY][option]} (month only)`;
+	}
 	const id = "add-" + item;
+	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH)
 	return (<>
-		<input type="checkbox" id={id} 
-			onChange={ (e) => {
-				setChecked(e.currentTarget.checked);
-			}} 
-		/>
-		<label htmlFor={id}> Add {item} for ${addOnPrices[item][time]}</label>
+		<label htmlFor={id}> {text}
+			<input 
+				type="checkbox" 
+				id={id} 
+				disabled={disabled}
+				onChange={ (e) => {
+					setChecked(e.currentTarget.checked);
+				}} 
+			/>
+		</label>
 		<br />
 	</>)
 }
