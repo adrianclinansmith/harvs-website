@@ -3,9 +3,31 @@ import logo from './images/TheVegCultureLogo.jpg';
 import homeImage from "./images/HomeBackground.png";
 import './App.css';
 import OrderNow from "./components/OrderNow";
+import Phone from "./components/Phone";
 
-function App() {
-	const [content, setContent] = useState("HOME");
+type PageTitle = "HOME" | "ORDER NOW" | "MENU" | "HOW IT WORKS" | "FAQ" | "CONTACT";
+const HOME = "HOME";
+const ORDER_NOW = "ORDER NOW";
+const MENU = "MENU";
+const HOW_IT_WORKS = "HOW IT WORKS";
+const FAQ = "FAQ";
+const CONTACT = "CONTACT";
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+// App Component
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+export default function App() {
+	// States
+	const [content, setContent] = useState<PageTitle>(HOME);
+	// Bold selected page link
+	const navLinkList = document.getElementsByClassName("nav-link");
+	for (let i = 0; i < navLinkList.length; i++) {
+		const navLink = navLinkList[i] as HTMLElement;
+		const selected = navLink.innerText === content;
+		navLink.style.textShadow = selected ? "0 0 0.5px black" : "none";
+	}
+	//JSX
 	return (
 		<div className="App">
 			<div className="banner">
@@ -24,22 +46,28 @@ function App() {
 			<header className="header">
 				<img src={logo} className="logo" alt="" />
 				<nav>
-					<NavLink setContent={setContent}>HOME</NavLink>
-					<NavLink setContent={setContent}>ORDER NOW</NavLink>
-					<NavLink setContent={setContent}>MENU</NavLink>
-					<NavLink setContent={setContent}>HOW IT WORKS</NavLink>
-					<NavLink setContent={setContent}>FAQ</NavLink>
-					<NavLink setContent={setContent}>CONTACT</NavLink>
+					<NavLink setContent={setContent}>{HOME}</NavLink>
+					<NavLink setContent={setContent}>{ORDER_NOW}</NavLink>
+					{/* <NavLink setContent={setContent}>{MENU}</NavLink> */}
+					<NavLink setContent={setContent}>{HOW_IT_WORKS}</NavLink>
+					<NavLink setContent={setContent}>{FAQ}</NavLink>
+					<NavLink setContent={setContent}>{CONTACT}</NavLink>
 				</nav>
 			</header>
 			<div className="content">
 				{
-					(content === "HOME"         && <Home/>) ||
-					(content === "ORDER NOW"    && <OrderNow/>) ||
-					(content === "MENU"         && <p>menu</p>) ||
-					(content === "HOW IT WORKS" && <HowItWorks/>) ||
-					(content === "FAQ"          && <Faq/>) ||
-					(content === "CONTACT"      && <Contact/>)
+					(content === HOME         
+						&& <Home/>) ||
+					(content === ORDER_NOW    
+						&& <OrderNow/>) ||
+					// (content === MENU         
+						// && <p>menu</p>) ||
+					(content === HOW_IT_WORKS 
+						&& <HowItWorks setContent={setContent}/>) ||
+					(content === FAQ          
+						&& <Faq setContent={setContent}/>) ||
+					(content === CONTACT      
+						&& <Contact/>)
 				}
 			</div>
 		</div>
@@ -51,19 +79,14 @@ function App() {
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 interface NavLinkProps extends React.PropsWithChildren {
-	setContent: React.Dispatch<React.SetStateAction<string>>;
+	setContent: React.Dispatch<React.SetStateAction<PageTitle>>;
 }
 
 function NavLink({ children, setContent }: NavLinkProps) {
 	return (
 		<button className="nav-link" 
-			onClick={ (e) => { 
-				const navLinks = document.getElementsByClassName("nav-link");
-				for (let i = 0; i < navLinks.length; i++) {
-					(navLinks[i] as HTMLElement).style.textShadow = "none";
-				}
-				setContent(e.currentTarget.innerText); 
-				e.currentTarget.style.textShadow = "0 0 0.5px black";
+			onClick={ (e) => {
+				setContent((e.currentTarget.innerText as PageTitle)); 
 			}}
 		>
 			{children}
@@ -71,8 +94,17 @@ function NavLink({ children, setContent }: NavLinkProps) {
 	);
 }
 
+function OrderNowLink({ children, setContent }: NavLinkProps) {
+	return (
+		// eslint-disable-next-line jsx-a11y/anchor-is-valid
+		<a href="#" onClick={ () => setContent(ORDER_NOW) }>
+			{children}
+		</a>
+	);
+}
+
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-// Content Components
+// Page Content Components
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
 function Home() {
@@ -110,7 +142,7 @@ function Home() {
 	</>);
 }
 
-function HowItWorks() {
+function HowItWorks({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
 			<p>Once you make your payment, you will be set up with our food delivery service the next business day.</p>
@@ -121,19 +153,18 @@ function HowItWorks() {
 
 			<p>Then we do it again with new recipes the next day.</p>
 
-			<p>It`s as easy as that! To get started today ORDER NOW.</p>
+			<p>It`s as easy as that! To get started today <OrderNowLink setContent={setContent}>ORDER NOW</OrderNowLink>.</p>
 		</div>
 	);
 }
 
-function Faq() {
+function Faq({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
-			<p><b>Can I try the food before signing up for the month?</b></p>
+			<p className="question"><b>Can I try the food before signing up for the month?</b></p>
+			<p>YES! You can sign up for a day, a week (5 days) or a month (20 days). Just place your order <OrderNowLink setContent={setContent}>here</OrderNowLink>.</p>
 
-			<p>YES! You can sign up for a day, a week (5 days) or a month (20 days). Just place your order here.</p>
-
-			<p><b>Can I pause my packages during my subscription?</b></p>
+			<p className="question"><b>Can I pause my packages during my subscription?</b></p>
 
 			<p>NO, please note that you will not be able to pause or stop your packages once signing up. Skipping a delivery will not be accounted for regardless if you request a delivery be made or not.</p>  
 
@@ -141,15 +172,15 @@ function Faq() {
 
 			<p>We cube some of the vegetables fresh in house & the food is cooked every morning and packaged piping hot.</p>
 
-			<p><b>What are Delivery Times?</b></p>
+			<p className="question"><b>What are Delivery Times?</b></p>
 
 			<p>We deliver Monday to Friday 9am to 4pm, if not earlier. We can NOT accommodate a specific time you need your food. This is a service that is delivery focused and dozens of factors out of our control affect delivery times. We do not guarantee anytime outside of our operating times of 9am to 4pm. The food will be delivered at ANY TIME during operating hours and is subject to change without warning, but will always be there between 9am-4pm.</p>
 
-			<p><b>Refund Policy?</b></p>
+			<p className="question"><b>Refund Policy?</b></p>
 
 			<p>We DO NOT offer refunds on food cancellations for any reason, please try the food for a day or a week if you`re not ready to commit for the month.</p>
 
-			<p><b>I live in an apartment, can you come to my door?</b></p>
+			<p className="question"><b>I live in an apartment, can you come to my door?</b></p>
 
 			<p>This is an incredibly important policy. We DO NOT go up to buildings under any circumstances. We will however give you a text and/or photo when your food is dropped in the lobby. We have a VERY limited time to do the deliveries and cannot change this policy. Please DO NOT WAIT to pick up your food in apartments or even houses, we do not take responsibility for lost or stolen packages. Make sure the food is microwaved or refrigerated as soon as possible.</p>
 
@@ -161,7 +192,7 @@ function Faq() {
 function Contact() {
 	return (
 		<div className="text-block">
-			<p>1 (905) 460-6000</p>
+			<p>Call <Phone/></p>
 
 			<p>We deliver Monday to Friday. 9am to 4pm if not earlier.</p>
 
@@ -169,5 +200,3 @@ function Contact() {
 		</div>
 	)
 }
-
-export default App;

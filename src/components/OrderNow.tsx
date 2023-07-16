@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./OrderNow.css";
 import meatIcon from "../images/Meat.png";
 import vegIcon from "../images/Leaf.png";
+import Phone from "./Phone";
 
 type TimeSpan = "month" | "week" | "day";
 const MONTH = "month";
@@ -56,23 +57,41 @@ export default function OrderNow() {
 	if (addExtraOnFriday && time === MONTH) {
 		totalPrice += addOnPrices[EXTRA_ON_FRIDAY][option];
 	}
+	// Order Summary
+	let orderSummary = `to order option ${option} for one ${time}`;
+	if (addChicken || addRice || addRoti || addExtraOnFriday) {
+		orderSummary += " plus added ";
+	}
+	orderSummary += addChicken ? CHICKEN + ", " : "";
+	orderSummary += addRice ? RICE + ", " : "";
+	orderSummary += addRoti ? ROTI + ", " : "";
+	orderSummary += addExtraOnFriday ? "extra package on fridays" : "";
+	orderSummary = orderSummary.replace(/,\s$/, "");
 	// JSX
 	return (<>
-		<h1>Total: ${totalPrice}</h1>
+		<div className="total">
+			<h1>Total: {money(totalPrice)}</h1>
+			<p className="subheading">delivery included</p>
+			{
+			option !== 0 &&
+				<>
+				<h2>Call <Phone/></h2>
+				<p className="order-summary">{orderSummary}</p>
+				</>
+			}
+		</div>
 		<div className="order-now-content">
 			{/* Option 1 */}
 			<Card option={1} setOption={setOption} setTime={setTime} veg>
 				<p>4 roti OR 2 with rice</p>
 				<p>1 Large Veg item (our choice & will alternate between Daal OR Subji.)</p>
 				<p>Sweets on Fridays</p>
-				<p>Delivery to your door included.</p>
 			</Card>
 			{/* Option 2 */}
 			<Card option={2} setOption={setOption} setTime={setTime} veg>
 				<p>1 Large Daal</p>
 				<p>1 Large Subji (no Roti/Rice)</p>
 				<p>Sweets on Fridays</p>
-				<p>Delivery to your door.</p>
 			</Card>
 			{/* Option 3 */}
 			<Card option={3} setOption={setOption} setTime={setTime} veg>
@@ -80,7 +99,6 @@ export default function OrderNow() {
 				<p>1 Large Dal</p>
 				<p>1 Subji </p>
 				<p>Sweets on Fridays </p>
-				<p>Delivery included</p> 
 			</Card>
 			{/* Option 4 */}
 			<Card option={4} setOption={setOption} setTime={setTime} veg>
@@ -88,7 +106,6 @@ export default function OrderNow() {
 				<p>1 Large Daal </p>
 				<p>1 Subji</p>
 				<p>Sweets on Fridays. </p>
-				<p>Delivery to your door is included.</p>
 			</Card>
 			{/* Option 5 */}
 			<Card option={5} setOption={setOption} setTime={setTime} veg={false}>
@@ -97,7 +114,6 @@ export default function OrderNow() {
 				<p>1 Subji</p>
 				<p>*Chicken will replace Subji 2x a week in a Large 12oz container</p>
 				<p>Sweets on Fridays</p>
-				<p>Delivery included.</p>
 			</Card>
 			{/* Option 6 */}
 			<Card option={6} setOption={setOption} setTime={setTime} veg>
@@ -105,38 +121,38 @@ export default function OrderNow() {
 				<p>1 large 12oz dal</p>
 				<p>1 large 12oz subji </p>
 				<p>Sweets on Fridays </p>
-				<p>Delivery included </p>
 			</Card>
-
 		</div>
-		{/* Add Chicken */}
-		<AddOnSelector 
-			item={CHICKEN}
-			option={option}
-			setChecked={setAddChicken}
-			time={time}
-		/>
-		{/* Add Rice */}
-		<AddOnSelector 
-			item={RICE} 
-			option={option}
-			setChecked={setAddRice}
-			time={time}
-		/>	
-		{/* Add Roti */}
-		<AddOnSelector 
-			item={ROTI}
-			option={option}
-			setChecked={setAddRoti}
-			time={time}
-		/>	
-		{/* Add One Extra Package on Fridays */}
-		<AddOnSelector 
-			item={EXTRA_ON_FRIDAY} 
-			option={option}
-			setChecked={setAddExtraOnFriday}
-			time={time}
-		/>
+		<div className="add-on-selector-container">
+			{/* Add Chicken */}
+			<AddOnSelector 
+				item={CHICKEN}
+				option={option}
+				setChecked={setAddChicken}
+				time={time}
+			/>
+			{/* Add Rice */}
+			<AddOnSelector 
+				item={RICE} 
+				option={option}
+				setChecked={setAddRice}
+				time={time}
+			/>	
+			{/* Add Roti */}
+			<AddOnSelector 
+				item={ROTI}
+				option={option}
+				setChecked={setAddRoti}
+				time={time}
+			/>	
+			{/* Add One Extra Package on Fridays */}
+			<AddOnSelector 
+				item={EXTRA_ON_FRIDAY} 
+				option={option}
+				setChecked={setAddExtraOnFriday}
+				time={time}
+			/>
+		</div>
 	</>);
 }
 
@@ -156,7 +172,9 @@ function Card({option, setOption, setTime, veg, children}: CardProps) {
 		<div className="card">
 			<div className="card_content">
 				<img src={veg ? vegIcon : meatIcon} alt={veg ? "veg" : "meat"}/>
-				{children}
+				<div className="card_text">
+					{children}
+				</div>
 				<div className="card_selector-container">
 					{/* Monthly */}
 					<MealPlanSelector 
@@ -206,7 +224,7 @@ function MealPlanSelector({ option, time, setOption, setTime }: MealPlanSelector
 		<label htmlFor={id}>
 			{time}
 			<br />
-			${prices[option][time]}
+			<b>${prices[option][time]}</b>
 		</label>
 	</>)
 }
@@ -221,11 +239,11 @@ interface AddOnSelectorProps {
 function AddOnSelector({item, option, setChecked, time}: AddOnSelectorProps) {
 	let text: string;
 	if (item !== EXTRA_ON_FRIDAY) {
-		text = `Add ${item} for $${addOnPrices[item][time]}`;
+		text = `Add ${item} for ${money(addOnPrices[item][time])}`;
 	} 
 	else {
-		text = "Add one extra package every friday for $";
-		text += `${addOnPrices[EXTRA_ON_FRIDAY][option]} (month only)`;
+		text = "Add one extra package every friday for ";
+		text += `${money(addOnPrices[EXTRA_ON_FRIDAY][option])} (month only)`;
 	}
 	const id = "add-" + item.replaceAll(" ", "-");
 	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH);
@@ -235,11 +253,19 @@ function AddOnSelector({item, option, setChecked, time}: AddOnSelectorProps) {
 			type="checkbox" 
 			id={id} 
 			disabled={disabled}
-			onChange={ (e) => setChecked(e.currentTarget.checked) } 
+			onChange={(e) => setChecked(e.currentTarget.checked && !disabled)} 
 		/>
 		<label htmlFor={id}> 
 			{text}
 		</label>
 		<br />
 	</>)
+}
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+// Helper Functions
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+function money(amount: number) {
+	return "$" + (amount % 1 === 0 ? `${amount}` : amount.toFixed(2));
 }

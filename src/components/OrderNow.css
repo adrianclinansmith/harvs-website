@@ -1,8 +1,23 @@
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Order Now
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+.total {
+	line-height: 0.2;
+	margin-top: 40px;
+}
+
+.total > .subheading {
+	color: grey;
+	padding-bottom: 20px;
+}
+
 .order-now-content {
 	justify-items: center; 
 	display: grid;
 	gap: 25px;
-	grid-template-columns: repeat(3, 1fr);
+	/*  */
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	/* background-color: gray; */
 	padding: 20px;
 	margin-left: auto;
@@ -33,7 +48,16 @@ Card
 .card_content {
 	margin: 5% 10%;
 	font-size: 20px;
+	/* background-color: red; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 90%;
 }
+
+/* .card_text {
+	background-color: red;
+} */
 
 .card_content > img {
 	width: 40px;
@@ -67,24 +91,39 @@ src: https://www.markheath.net/post/customize-radio-button-css
 
 .meal-plan-selector + label {
 	display: inline-block;
-    background-color: #ddd;
+    background-color: rgba(255, 255, 255, 0.4);
     padding: 10px 0;
 	margin: 0 1%;
-    font-family: sans-serif, Arial;
     font-size: 16px;
-    border: 2px solid #444;
+	line-height: 1.5;
+    border: 1.5px solid #444;
     border-radius: 4px;
 	text-align: center;
 }
 
 .meal-plan-selector:checked + label {
-    background-color:#bfb;
-    border-color: #4c4;
+    background-color:rgba(30, 235, 10, 0.4);
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Add-on Selector
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+.add-on-selector-container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	font-size: 20px;
+	line-height: 2.2;
+	padding-bottom: 50px;
+}
+
+.add-on-selector {
+	width: 20px;
+	height: 20px;
+	accent-color: rgb(80, 120, 60);
+}
 
 .add-on-selector:disabled + label {
 	text-decoration: line-through;
