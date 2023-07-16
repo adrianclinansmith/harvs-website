@@ -135,7 +135,7 @@ Home
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-Other 
+Order Now 
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .card {
@@ -174,4 +174,9 @@ Other
 	margin-right: auto;
 	width: 80%;
 	overflow: hidden;
+}
+
+.add-on-selector:disabled + label {
+	text-decoration: line-through;
+	color: lightgray;
 }

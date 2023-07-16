@@ -44,11 +44,15 @@ export default function OrderNow() {
 	const [addChicken, setAddChicken] = useState(false);
 	const [addRice, setAddRice] = useState(false);
 	const [addRoti, setAddRoti] = useState(false);
+	const [addExtraOnFriday, setAddExtraOnFriday] = useState(false);
 	// Total Price Calculation
 	let totalPrice = prices[option][time];
-	totalPrice += (addChicken ? 1 : 0) * addOnPrices["chicken"][time];
-	totalPrice += (addRice ? 1 : 0)    * addOnPrices["rice"][time];
-	totalPrice += (addRoti ? 1 : 0)    * addOnPrices["roti"][time];
+	totalPrice += (addChicken ? 1 : 0) * addOnPrices[CHICKEN][time];
+	totalPrice += (addRice ? 1 : 0)    * addOnPrices[RICE][time];
+	totalPrice += (addRoti ? 1 : 0)    * addOnPrices[ROTI][time];
+	if (addExtraOnFriday && time === MONTH) {
+		totalPrice += addOnPrices[EXTRA_ON_FRIDAY][option];
+	}
 	// JSX
 	return (<>
 		<h1>Total: ${totalPrice}</h1>
@@ -127,7 +131,7 @@ export default function OrderNow() {
 		<AddOnSelector 
 			item={EXTRA_ON_FRIDAY} 
 			option={option}
-			setChecked={setAddRoti}
+			setChecked={setAddExtraOnFriday}
 			time={time}
 		/>
 	</>);
@@ -152,22 +156,22 @@ function Card({option, setOption, setTime, veg, children}: CardProps) {
 				{children}
 			</div>
 			{/* Monthly */}
-			<input type="radio" name="meal-plan" value="month"
+			<input type="radio" name="meal-plan" value={MONTH}
 				onChange={() => {setOption(option); setTime(MONTH);}}
 			/>
 			<label htmlFor="child">
 				${prices[option][MONTH]} for the month
 			</label><br />
 			{/* Weekly */}
-			<input type="radio" name="meal-plan" value="week"
+			<input type="radio" name="meal-plan" value={WEEK}
 				onChange={() => {setOption(option); setTime(WEEK);}}
 			/>
 			<label htmlFor="adult">
 				${prices[option][WEEK]} for the week
 			</label><br />
 			{/* Daily */}
-			<input type="radio" name="meal-plan" value="day"
-				onChange={() => {setOption(option); setTime(DAY);}}
+			<input type="radio" name="meal-plan" value={DAY}
+				onChange={ () => {setOption(option); setTime(DAY);} }
 			/>
 			<label htmlFor="senior">
 				${prices[option][DAY]} for the day.
@@ -192,18 +196,18 @@ function AddOnSelector({item, option, setChecked, time}: AddOnSelectorProps) {
 		text = "Add one extra package every friday for $";
 		text += `${addOnPrices[EXTRA_ON_FRIDAY][option]} (month only)`;
 	}
-	const id = "add-" + item;
-	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH)
+	const id = "add-" + item.replaceAll(" ", "-");
+	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH);
 	return (<>
-		<label htmlFor={id}> {text}
-			<input 
-				type="checkbox" 
-				id={id} 
-				disabled={disabled}
-				onChange={ (e) => {
-					setChecked(e.currentTarget.checked);
-				}} 
-			/>
+		<input 
+			className="add-on-selector"
+			type="checkbox" 
+			id={id} 
+			disabled={disabled}
+			onChange={ (e) => setChecked(e.currentTarget.checked) } 
+		/>
+		<label htmlFor={id}> 
+			{text}
 		</label>
 		<br />
 	</>)
