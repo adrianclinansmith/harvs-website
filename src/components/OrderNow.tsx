@@ -1,4 +1,7 @@
 import { useState } from "react";
+import "./OrderNow.css";
+import meatIcon from "../images/Meat.png";
+import vegIcon from "../images/Leaf.png";
 
 type TimeSpan = "month" | "week" | "day";
 const MONTH = "month";
@@ -151,33 +154,61 @@ interface CardProps extends React.PropsWithChildren {
 function Card({option, setOption, setTime, veg, children}: CardProps) {
 	return (
 		<div className="card">
-			<h2>{veg ? "VEG": "MEAT"}</h2>
 			<div className="card_content">
+				<img src={veg ? vegIcon : meatIcon} alt={veg ? "veg" : "meat"}/>
 				{children}
+				<div className="card_selector-container">
+					{/* Monthly */}
+					<MealPlanSelector 
+						option={option}
+						time={MONTH}
+						setOption={setOption}
+						setTime={setTime}
+					/>
+					{/* Weekly */}
+					<MealPlanSelector 
+						option={option}
+						time={WEEK}
+						setOption={setOption}
+						setTime={setTime}
+					/>
+					{/* Daily */}
+					<MealPlanSelector 
+						option={option}
+						time={DAY}
+						setOption={setOption}
+						setTime={setTime}
+					/>
+				</div>
 			</div>
-			{/* Monthly */}
-			<input type="radio" name="meal-plan" value={MONTH}
-				onChange={() => {setOption(option); setTime(MONTH);}}
-			/>
-			<label htmlFor="child">
-				${prices[option][MONTH]} for the month
-			</label><br />
-			{/* Weekly */}
-			<input type="radio" name="meal-plan" value={WEEK}
-				onChange={() => {setOption(option); setTime(WEEK);}}
-			/>
-			<label htmlFor="adult">
-				${prices[option][WEEK]} for the week
-			</label><br />
-			{/* Daily */}
-			<input type="radio" name="meal-plan" value={DAY}
-				onChange={ () => {setOption(option); setTime(DAY);} }
-			/>
-			<label htmlFor="senior">
-				${prices[option][DAY]} for the day.
-			</label>
 		</div>
 	);
+}
+
+interface MealPlanSelectorProps {
+	option: number;
+	time: TimeSpan;
+	setOption: React.Dispatch<React.SetStateAction<number>>;
+	setTime: React.Dispatch<React.SetStateAction<TimeSpan>>;
+}
+
+function MealPlanSelector({ option, time, setOption, setTime }: MealPlanSelectorProps) {
+	const radioGroup = "meal-plan-selector";
+	const id = `meal-plan-${option}-${time}`
+	return (<>
+		<input 
+			className={radioGroup} 
+			id={id}
+			type="radio" 
+			name={radioGroup}
+			onChange={ () => {setOption(option); setTime(time);} }
+		/>
+		<label htmlFor={id}>
+			{time}
+			<br />
+			${prices[option][time]}
+		</label>
+	</>)
 }
 
 interface AddOnSelectorProps {
