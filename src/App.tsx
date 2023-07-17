@@ -44,8 +44,10 @@ export default function App() {
 				</div>
 			</div>
 			<header className="header">
+				<ShowNavButton/>
 				<img src={logo} className="logo" alt="" />
-				<nav>
+				<nav className="hide-when-sidebar">
+					<HideNavButton/>
 					<NavLink setContent={setContent}>{HOME}</NavLink>
 					<NavLink setContent={setContent}>{ORDER_NOW}</NavLink>
 					{/* <NavLink setContent={setContent}>{MENU}</NavLink> */}
@@ -86,7 +88,9 @@ function NavLink({ children, setContent }: NavLinkProps) {
 	return (
 		<button className="nav-link" 
 			onClick={ (e) => {
-				setContent((e.currentTarget.innerText as PageTitle)); 
+				setContent((e.currentTarget.innerText as PageTitle));
+				const nav = document.getElementsByTagName("nav")[0];
+				nav.classList.add("hide-when-sidebar");
 			}}
 		>
 			{children}
@@ -100,6 +104,24 @@ function OrderNowLink({ children, setContent }: NavLinkProps) {
 		<a href="#" onClick={ () => setContent(ORDER_NOW) }>
 			{children}
 		</a>
+	);
+}
+
+function ShowNavButton() {
+	return (
+		<button className="show-navbar" onClick={() => {
+			const nav = document.getElementsByTagName("nav")[0];
+			nav.classList.remove("hide-when-sidebar");
+		}}>≡</button>
+	);
+}
+
+function HideNavButton() {
+	return (
+		<button className="hide-navbar" onClick={() => {
+			const nav = document.getElementsByTagName("nav")[0];
+			nav.classList.add("hide-when-sidebar");
+		}}>✕</button>
 	);
 }
 

@@ -56,11 +56,74 @@ Header
 	width: 165px;
 }
 
+.show-navbar {
+	position: absolute;
+	left: 1px;
+	/* width: 40px;
+	height: 40px; */
+	font-size: 30px;
+	color: black;
+	background-color: transparent;
+}
+
+.hide-navbar {
+	text-align: right;
+	font-size: 35px;
+	color: white;
+	background-color: transparent;
+	border: none;
+}
+
+@media (min-width: 600px) {
+	nav {
+		display: flex;
+		/* background-color: blue; */
+		width: 100%;
+		max-width: 700px;
+		/* align-items: center; */
+		justify-content: space-evenly;
+		/* flex-wrap: nowrap; */
+		/* overflow-x: scroll; */
+	}
+	.show-navbar, .hide-navbar {
+		display: none;
+	}
+	.nav-link {
+		color: #5c5c5c;
+	}
+}
+
+@media (max-width: 600px) {
+	nav {
+		display: flex;
+		flex-direction: column;
+		gap: 5%;
+		height: 100%;
+		width: 200px; 
+		position: fixed; 
+		z-index: 1; 
+		top: 0; 
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.8); 
+		overflow-x: hidden; 
+		padding-top: 60px; 
+		transition: 0.5s; 
+	}
+	nav.hide-when-sidebar {
+		width: 0;
+	}
+	.nav-link {
+		color: white;
+	}
+}
+
 .nav-link {
-	color: #5c5c5c;
+	/* flex: 1; */
 	font-size: 15px;
-	margin-left: 20px;
-	margin-right: 20px;
+	width: fit-content;
+	white-space: nowrap;
+	/* margin-left: 20px;
+	margin-right: 20px; */
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
