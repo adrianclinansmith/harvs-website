@@ -13,7 +13,7 @@ type AddOn = "chicken" | "rice" | "roti" | "extra on friday";
 const CHICKEN = "chicken";
 const RICE = "rice";
 const ROTI = "roti";
-const EXTRA_FRIDAY = "extra on friday";
+const EXTRA_ON_FRIDAY = "extra on friday";
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Prices
@@ -34,7 +34,7 @@ const addOnPrices = {
 	[CHICKEN]:         { [MONTH]: 40, [WEEK]: 20,  [DAY]: 10 },
 	[RICE]:            { [MONTH]: 30, [WEEK]: 7.5, [DAY]: 1.5 },
 	[ROTI]:            { [MONTH]: 20, [WEEK]: 5,   [DAY]: 1 },
-	[EXTRA_FRIDAY]: [0, 32, 36, 40, 44, 44, 50]
+	[EXTRA_ON_FRIDAY]: [0, 32, 36, 40, 44, 44, 50]
 };
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -51,10 +51,10 @@ export default function OrderNow() {
 	const [addExtraOnFriday, setAddExtraOnFriday] = useState(false);
 	// Total Price Calculation
 	let totalPrice = prices[option][time];
-	totalPrice += (addChicken ? 1 : 0)       * addOnPrices[CHICKEN][time];
-	totalPrice += (addRice ? 1 : 0)          * addOnPrices[RICE][time];
-	totalPrice += (addRoti ? 1 : 0)          * addOnPrices[ROTI][time];
-	totalPrice += (addExtraOnFriday ? 1 : 0) * addOnPrices[EXTRA_FRIDAY][option];
+	totalPrice += addChicken ? addOnPrices[CHICKEN][time] : 0;
+	totalPrice += addRice ? addOnPrices[RICE][time] : 0;
+	totalPrice += addRoti ?  addOnPrices[ROTI][time] : 0;
+	totalPrice += addExtraOnFriday ? addOnPrices[EXTRA_ON_FRIDAY][option] : 0;
 	// Order Summary
 	let orderSummary = `to order option ${option} for one ${time}`;
 	if (addChicken || addRice || addRoti || addExtraOnFriday) {
@@ -65,19 +65,15 @@ export default function OrderNow() {
 	orderSummary += addRoti ? ROTI + ", " : "";
 	orderSummary += addExtraOnFriday ? "extra package on fridays" : "";
 	orderSummary = orderSummary.replace(/,\s$/, "");
+	if (!option) {
+		orderSummary = "after you've selected a meal plan and optional add-ons below";
+	}
 	// JSX
 	return (<>
-		<div className="total">
-			<h1>Total: {money(totalPrice)}</h1>
-			<p className="subheading">delivery included</p>
-			{
-			option !== 0 &&
-				<>
-				<h2>Call <Phone/></h2>
-				<p className="order-summary">{orderSummary}</p>
-				</>
-			}
-		</div>
+		<h1 className="total-price">     Total: {money(totalPrice)}</h1>
+		<p className="delivery-included">delivery included         </p>
+		<h2 className="phone-number">    Call <Phone/>             </h2>
+		<p className="order-summary">    {orderSummary}            </p>
 		<div className="order-now-content">
 			{/* Option 1 */}
 			<Card option={1} setOption={setOption} setTime={setTime} veg>
@@ -145,7 +141,7 @@ export default function OrderNow() {
 			/>	
 			{/* Add One Extra Package on Fridays */}
 			<AddOnSelector 
-				item={EXTRA_FRIDAY} 
+				item={EXTRA_ON_FRIDAY} 
 				option={option}
 				setAddOn={setAddExtraOnFriday}
 				time={time}
@@ -237,15 +233,15 @@ interface AddOnSelectorProps {
 function AddOnSelector({item, option, setAddOn, time}: AddOnSelectorProps) {
 	const [checked, setChecked] = useState(false);
 	let text: string;
-	if (item !== EXTRA_FRIDAY) {
+	if (item !== EXTRA_ON_FRIDAY) {
 		text = `Add ${item} for ${money(addOnPrices[item][time])}`;
 	} 
 	else {
 		text = "Add one extra package every friday for ";
-		text += `${money(addOnPrices[EXTRA_FRIDAY][option])} (month only)`;
+		text += `${money(addOnPrices[EXTRA_ON_FRIDAY][option])} (month only)`;
 	}
 	const id = "add-" + item.replaceAll(" ", "-");
-	const disabled = !option || (item === EXTRA_FRIDAY && time !== MONTH);
+	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH);
 	setAddOn(checked && !disabled);
 	return (<>
 		<input 

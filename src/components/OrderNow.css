@@ -2,12 +2,15 @@
 Order Now
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
-.total {
+.total-price, .phone-number {
 	line-height: 0.2;
+}
+
+.total-price {
 	margin-top: 40px;
 }
 
-.total > .subheading {
+.delivery-included {
 	color: grey;
 	padding-bottom: 20px;
 }
@@ -16,9 +19,7 @@ Order Now
 	justify-items: center; 
 	display: grid;
 	gap: 25px;
-	/*  */
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	/* background-color: gray; */
 	padding: 20px;
 	margin-left: auto;
 	margin-right: auto;
