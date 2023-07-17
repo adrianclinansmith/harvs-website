@@ -13,7 +13,7 @@ type AddOn = "chicken" | "rice" | "roti" | "extra on friday";
 const CHICKEN = "chicken";
 const RICE = "rice";
 const ROTI = "roti";
-const EXTRA_ON_FRIDAY = "extra on friday";
+const EXTRA_FRIDAY = "extra on friday";
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Prices
@@ -34,7 +34,7 @@ const addOnPrices = {
 	[CHICKEN]:         { [MONTH]: 40, [WEEK]: 20,  [DAY]: 10 },
 	[RICE]:            { [MONTH]: 30, [WEEK]: 7.5, [DAY]: 1.5 },
 	[ROTI]:            { [MONTH]: 20, [WEEK]: 5,   [DAY]: 1 },
-	[EXTRA_ON_FRIDAY]: [0, 32, 36, 40, 44, 44, 50]
+	[EXTRA_FRIDAY]: [0, 32, 36, 40, 44, 44, 50]
 };
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -51,12 +51,10 @@ export default function OrderNow() {
 	const [addExtraOnFriday, setAddExtraOnFriday] = useState(false);
 	// Total Price Calculation
 	let totalPrice = prices[option][time];
-	totalPrice += (addChicken ? 1 : 0) * addOnPrices[CHICKEN][time];
-	totalPrice += (addRice ? 1 : 0)    * addOnPrices[RICE][time];
-	totalPrice += (addRoti ? 1 : 0)    * addOnPrices[ROTI][time];
-	if (addExtraOnFriday && time === MONTH) {
-		totalPrice += addOnPrices[EXTRA_ON_FRIDAY][option];
-	}
+	totalPrice += (addChicken ? 1 : 0)       * addOnPrices[CHICKEN][time];
+	totalPrice += (addRice ? 1 : 0)          * addOnPrices[RICE][time];
+	totalPrice += (addRoti ? 1 : 0)          * addOnPrices[ROTI][time];
+	totalPrice += (addExtraOnFriday ? 1 : 0) * addOnPrices[EXTRA_FRIDAY][option];
 	// Order Summary
 	let orderSummary = `to order option ${option} for one ${time}`;
 	if (addChicken || addRice || addRoti || addExtraOnFriday) {
@@ -128,28 +126,28 @@ export default function OrderNow() {
 			<AddOnSelector 
 				item={CHICKEN}
 				option={option}
-				setChecked={setAddChicken}
+				setAddOn={setAddChicken}
 				time={time}
 			/>
 			{/* Add Rice */}
 			<AddOnSelector 
 				item={RICE} 
 				option={option}
-				setChecked={setAddRice}
+				setAddOn={setAddRice}
 				time={time}
 			/>	
 			{/* Add Roti */}
 			<AddOnSelector 
 				item={ROTI}
 				option={option}
-				setChecked={setAddRoti}
+				setAddOn={setAddRoti}
 				time={time}
 			/>	
 			{/* Add One Extra Package on Fridays */}
 			<AddOnSelector 
-				item={EXTRA_ON_FRIDAY} 
+				item={EXTRA_FRIDAY} 
 				option={option}
-				setChecked={setAddExtraOnFriday}
+				setAddOn={setAddExtraOnFriday}
 				time={time}
 			/>
 		</div>
@@ -232,28 +230,30 @@ function MealPlanSelector({ option, time, setOption, setTime }: MealPlanSelector
 interface AddOnSelectorProps {
 	item: AddOn;
 	option: number;
-	setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+	setAddOn: React.Dispatch<React.SetStateAction<boolean>>;
 	time: TimeSpan;
 }
 
-function AddOnSelector({item, option, setChecked, time}: AddOnSelectorProps) {
+function AddOnSelector({item, option, setAddOn, time}: AddOnSelectorProps) {
+	const [checked, setChecked] = useState(false);
 	let text: string;
-	if (item !== EXTRA_ON_FRIDAY) {
+	if (item !== EXTRA_FRIDAY) {
 		text = `Add ${item} for ${money(addOnPrices[item][time])}`;
 	} 
 	else {
 		text = "Add one extra package every friday for ";
-		text += `${money(addOnPrices[EXTRA_ON_FRIDAY][option])} (month only)`;
+		text += `${money(addOnPrices[EXTRA_FRIDAY][option])} (month only)`;
 	}
 	const id = "add-" + item.replaceAll(" ", "-");
-	const disabled = !option || (item === EXTRA_ON_FRIDAY && time !== MONTH);
+	const disabled = !option || (item === EXTRA_FRIDAY && time !== MONTH);
+	setAddOn(checked && !disabled);
 	return (<>
 		<input 
 			className="add-on-selector"
 			type="checkbox" 
 			id={id} 
 			disabled={disabled}
-			onChange={(e) => setChecked(e.currentTarget.checked && !disabled)} 
+			onChange={(e) => setChecked(e.currentTarget.checked)} 
 		/>
 		<label htmlFor={id}> 
 			{text}
