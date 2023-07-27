@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from './images/TheVegCultureLogo.jpg';
 import homeImage from "./images/HomeBackground.png";
+import menuImage from "./images/Menu.png";
 import './App.css';
 import OrderNow from "./components/OrderNow";
 import Phone from "./components/Phone";
@@ -49,7 +50,7 @@ export default function App() {
 					<HideNavButton/>
 					<NavLink setContent={setContent}>{HOME}</NavLink>
 					<NavLink setContent={setContent}>{ORDER_NOW}</NavLink>
-					{/* <NavLink setContent={setContent}>{MENU}</NavLink> */}
+					<NavLink setContent={setContent}>{MENU}</NavLink>
 					<NavLink setContent={setContent}>{HOW_IT_WORKS}</NavLink>
 					<NavLink setContent={setContent}>{FAQ}</NavLink>
 					<NavLink setContent={setContent}>{CONTACT}</NavLink>
@@ -61,8 +62,8 @@ export default function App() {
 						&& <Home/>) ||
 					(content === ORDER_NOW    
 						&& <OrderNow/>) ||
-					// (content === MENU         
-						// && <p>menu</p>) ||
+					(content === MENU         
+						&& <Menu/>) ||
 					(content === HOW_IT_WORKS 
 						&& <HowItWorks setContent={setContent}/>) ||
 					(content === FAQ          
@@ -158,6 +159,10 @@ function Home() {
 			<p><b>No waste:</b> With our service, you only receive the meals you need, so there's no need to worry about excess food going to waste.</p>
 		</div>
 	</>);
+}
+
+function Menu() {
+	return <img className="menu-image" src={menuImage} alt="" />
 }
 
 function HowItWorks({ setContent }: NavLinkProps) {

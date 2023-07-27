@@ -81,16 +81,13 @@ Header
 }
 
 /* Turn nav into row of buttons */
-@media (min-width: 600px) {
+@media (min-width: 601px) {
 	nav {
 		display: flex;
-		width: 100% !important;
+		width: 100% !important; /* Override animation close */
 		max-width: 700px;
-		/* align-items: center; */
 		justify-content: space-evenly;
 		padding-top: 15px;
-		/* flex-wrap: nowrap; */
-		/* overflow-x: scroll; */
 	}
 	#show-navbar-button, #hide-navbar-button {
 		display: none;
@@ -205,6 +202,16 @@ Home
 	margin: auto;
 	height: fit-content;
 	font-size: 1.4vw;
+}
+
+/*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Menu
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
+
+.menu-image {
+	margin-top: 10%;
+	margin-bottom: 10%;
+	width: 90%;
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
