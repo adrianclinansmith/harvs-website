@@ -34,19 +34,18 @@ export default function App() {
 				<div className="banner_item">
 					FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
 				</div>
-				<div className="banner_item">
+				{/* <div className="banner_item">
 					FRESH MADE INDIAN FOOD DELIVERED TO YOUR DOOR MONDAY TO 
 					FRIDAY FOR AS LOW AS $160/MONTH!
 				</div>
-				{/* Repeat first element for infinite carousel in CSS */}
 				<div className="banner_item">
 					FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
-				</div>
+				</div> */}
 			</div>
 			<header className="header">
 				<ShowNavButton/>
 				<img src={logo} className="logo" alt="" />
-				<nav className="hide-when-sidebar">
+				<nav>
 					<HideNavButton/>
 					<NavLink setContent={setContent}>{HOME}</NavLink>
 					<NavLink setContent={setContent}>{ORDER_NOW}</NavLink>
@@ -89,8 +88,7 @@ function NavLink({ children, setContent }: NavLinkProps) {
 		<button className="nav-link" 
 			onClick={ (e) => {
 				setContent((e.currentTarget.innerText as PageTitle));
-				const nav = document.getElementsByTagName("nav")[0];
-				nav.classList.add("hide-when-sidebar");
+				showNavBar(false);
 			}}
 		>
 			{children}
@@ -109,19 +107,17 @@ function OrderNowLink({ children, setContent }: NavLinkProps) {
 
 function ShowNavButton() {
 	return (
-		<button className="show-navbar" onClick={() => {
-			const nav = document.getElementsByTagName("nav")[0];
-			nav.classList.remove("hide-when-sidebar");
-		}}>≡</button>
+		<button id="show-navbar-button" onClick={_=> showNavBar(true)}>
+			≡
+		</button>
 	);
 }
 
 function HideNavButton() {
 	return (
-		<button className="hide-navbar" onClick={() => {
-			const nav = document.getElementsByTagName("nav")[0];
-			nav.classList.add("hide-when-sidebar");
-		}}>✕</button>
+		<button id="hide-navbar-button" onClick={_=> showNavBar(false)}>
+			✕
+		</button>
 	);
 }
 
@@ -221,4 +217,20 @@ function Contact() {
 			<p>They are delivered five times a week for four weeks (20 PACKAGES TOTAL)!!!!</p>
 		</div>
 	)
+}
+
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+// Helper Functions
+// *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+function showNavBar(show: boolean) {
+	const showNavButton = document.getElementById("show-navbar-button")!;
+	if (showNavButton.style.display === "none") {
+		return;
+	}
+	const keyframes = [ {width: 0}, {width: "250px"} ];
+	const options: KeyframeAnimationOptions = {
+		duration: 300, direction: show ? "normal" : "reverse", fill: "forwards"
+	};
+	document.getElementsByTagName("nav")[0].animate(keyframes, options);
 }

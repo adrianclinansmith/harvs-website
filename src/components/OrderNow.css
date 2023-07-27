@@ -3,7 +3,13 @@ Order Now
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .total-price, .phone-number {
-	line-height: 0.2;
+	margin-bottom: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.delivery-included, .order-summary {
+	margin-top: 0;
 }
 
 .total-price {
@@ -25,6 +31,7 @@ Order Now
 	margin-right: auto;
 	width: 80%;
 	overflow: hidden;
+	/* background-color: red; */
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -47,18 +54,14 @@ Card
 }
 
 .card_content {
-	margin: 5% 10%;
+	margin: 5% 5%;
 	font-size: 20px;
-	/* background-color: red; */
+	/* background-color: blue; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	height: 90%;
 }
-
-/* .card_text {
-	background-color: red;
-} */
 
 .card_content > img {
 	width: 40px;
@@ -66,6 +69,7 @@ Card
 
 .card_selector-container {
 	/* background-color: red; */
+	padding-bottom: 2%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -81,7 +85,7 @@ Card
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Meal Plan Selector
-src: https://www.markheath.net/post/customize-radio-button-css
+Custom Radio-buttons: https://www.markheath.net/post/customize-radio-button-css
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .meal-plan-selector {

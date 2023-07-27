@@ -70,51 +70,47 @@ export default function OrderNow() {
 	}
 	// JSX
 	return (<>
-		<h1 className="total-price">     Total: {money(totalPrice)}</h1>
-		<p className="delivery-included">delivery included         </p>
-		<h2 className="phone-number">    Call <Phone/>             </h2>
-		<p className="order-summary">    {orderSummary}            </p>
+		<h1 className="total-price">Total: {money(totalPrice)}</h1>
+		<p className="delivery-included">
+			delivery included, & sweets every friday       
+		</p>
+		<h2 className="phone-number"> Call or Text <Phone/> </h2>
+		<p className="order-summary"> {orderSummary} </p>
 		<div className="order-now-content">
 			{/* Option 1 */}
 			<Card option={1} setOption={setOption} setTime={setTime} veg>
-				<p>4 roti OR 2 with rice</p>
-				<p>1 Large Veg item (our choice & will alternate between Daal OR Subji.)</p>
-				<p>Sweets on Fridays</p>
+				<p>4 Roti OR 2 Roti with Rice</p>
+				<p>1 Large Veg Item (12oz)</p>
 			</Card>
 			{/* Option 2 */}
 			<Card option={2} setOption={setOption} setTime={setTime} veg>
-				<p>1 Large Daal</p>
-				<p>1 Large Subji (no Roti/Rice)</p>
-				<p>Sweets on Fridays</p>
+				<p>1 Large Dal (12oz)</p>
+				<p>1 Large Subji (12oz)</p>
 			</Card>
 			{/* Option 3 */}
 			<Card option={3} setOption={setOption} setTime={setTime} veg>
 				<p>4 Roti with Rice</p> 
-				<p>1 Large Dal</p>
-				<p>1 Subji </p>
-				<p>Sweets on Fridays </p>
+				<p>1 Large Dal (12oz)</p>
+				<p>1 Regular Subji (8oz)</p>
 			</Card>
 			{/* Option 4 */}
 			<Card option={4} setOption={setOption} setTime={setTime} veg>
-				<p>8 roti OR 6 roti with rice</p>
-				<p>1 Large Daal </p>
-				<p>1 Subji</p>
-				<p>Sweets on Fridays. </p>
+				<p>8 Roti OR 6 Roti with Rice</p>
+				<p>1 Large Dal (12oz)</p>
+				<p>1 Regular Subji (8oz)</p>
 			</Card>
 			{/* Option 5 */}
 			<Card option={5} setOption={setOption} setTime={setTime} veg={false}>
-				<p>8 roti or 6 with rice</p>
-				<p>1 Large Daal</p>
-				<p>1 Subji</p>
-				<p>*Chicken will replace Subji 2x a week in a Large 12oz container</p>
-				<p>Sweets on Fridays</p>
+				<p>8 Roti OR 6 Roti with Rice</p>
+				<p>1 Large Dal (12oz)</p>
+				<p>1 Regular Subji (8oz)</p>
+				<p>*Large Chicken (12oz) will replace Subji 2x a week</p>
 			</Card>
 			{/* Option 6 */}
 			<Card option={6} setOption={setOption} setTime={setTime} veg>
-				<p>8 roti or 6 roti with rice</p>
-				<p>1 large 12oz dal</p>
-				<p>1 large 12oz subji </p>
-				<p>Sweets on Fridays </p>
+				<p>8 Roti or 6 Roti with Rice</p>
+				<p>1 Large Dal (12oz)</p>
+				<p>1 Large Subji (12oz)</p>
 			</Card>
 		</div>
 		<div className="add-on-selector-container">

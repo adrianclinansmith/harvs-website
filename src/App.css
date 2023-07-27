@@ -25,15 +25,20 @@ Banner
 	overflow: hidden;
 }
 
+/* .carousel {
+	
+} */
+
 .banner_item {
 	/* duration | easing-function | delay | iteration | fille-mode | name */
-	animation: 15s linear 0s infinite carousel;
+	/* animation: 15s linear 0s infinite carousel; */
 	display: flex;           /* Center content */
 	align-items: center;     /* Center content */
 	justify-content: center; /* Center content */
 	flex-shrink: 0;
 	height: inherit;
-	width: inherit;
+	width: 100vw;
+	font-size: max(10px, 1.2vw);
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -56,7 +61,7 @@ Header
 	width: 165px;
 }
 
-.show-navbar {
+#show-navbar-button {
 	position: absolute;
 	left: 1px;
 	/* width: 40px;
@@ -64,9 +69,10 @@ Header
 	font-size: 30px;
 	color: black;
 	background-color: transparent;
+	border: none;
 }
 
-.hide-navbar {
+#hide-navbar-button {
 	text-align: right;
 	font-size: 35px;
 	color: white;
@@ -74,18 +80,19 @@ Header
 	border: none;
 }
 
+/* Turn nav into row of buttons */
 @media (min-width: 600px) {
 	nav {
 		display: flex;
-		/* background-color: blue; */
-		width: 100%;
+		width: 100% !important;
 		max-width: 700px;
 		/* align-items: center; */
 		justify-content: space-evenly;
+		padding-top: 15px;
 		/* flex-wrap: nowrap; */
 		/* overflow-x: scroll; */
 	}
-	.show-navbar, .hide-navbar {
+	#show-navbar-button, #hide-navbar-button {
 		display: none;
 	}
 	.nav-link {
@@ -93,13 +100,14 @@ Header
 	}
 }
 
+/* Turn nav into sidebar */
 @media (max-width: 600px) {
 	nav {
 		display: flex;
 		flex-direction: column;
 		gap: 5%;
 		height: 100%;
-		width: 200px; 
+		width: 0; 
 		position: fixed; 
 		z-index: 1; 
 		top: 0; 
@@ -107,10 +115,6 @@ Header
 		background-color: rgba(0, 0, 0, 0.8); 
 		overflow-x: hidden; 
 		padding-top: 60px; 
-		transition: 0.5s; 
-	}
-	nav.hide-when-sidebar {
-		width: 0;
 	}
 	.nav-link {
 		color: white;
@@ -200,6 +204,7 @@ Home
 	right: 0;
 	margin: auto;
 	height: fit-content;
+	font-size: 1.4vw;
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
