@@ -47,7 +47,7 @@ Header
 
 .header {
   background-color: white;
-  height: 190px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,9 @@ Header
 }
 
 .logo {
-	width: 165px;
+	width: 175px;
+	padding-top: 2%;
+	padding-bottom: 2%;
 }
 
 #show-navbar-button {
@@ -80,7 +82,7 @@ Header
 	border: none;
 }
 
-/* Turn nav into row of buttons */
+/* Nav is row of buttons */
 @media (min-width: 601px) {
 	nav {
 		display: flex;
@@ -88,6 +90,7 @@ Header
 		max-width: 700px;
 		justify-content: space-evenly;
 		padding-top: 15px;
+		padding-bottom: 2%;
 	}
 	#show-navbar-button, #hide-navbar-button {
 		display: none;
@@ -97,7 +100,7 @@ Header
 	}
 }
 
-/* Turn nav into sidebar */
+/* Nav is sidebar */
 @media (max-width: 600px) {
 	nav {
 		display: flex;

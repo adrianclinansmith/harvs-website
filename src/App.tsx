@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './images/TheVegCultureLogo.jpg';
+import logo from './images/KwTiffinLogo.png';
 import homeImage from "./images/HomeBackground.png";
 import menuImage from "./images/Menu.png";
 import './App.css';
