@@ -138,7 +138,7 @@ function Home() {
 			</div>
 		</div>
 		<div className="text-block">
-			<p>KW tiffin is a monthly Indian food subscription service that's cooked, packaged & delivered right to your door.</p>
+			<p>KW Tiffin is a monthly Indian food subscription service that's cooked, packaged & delivered right to your door.</p>
 
 			<p>We offer incredibly affordable rates for fresh food that's cooked everyday before delivery.</p>
 
