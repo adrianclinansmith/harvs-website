@@ -168,6 +168,7 @@ function Menu() {
 function HowItWorks({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
+			<h1>How It Works</h1>
 			<p>Once you make your payment, you will be set up with our food delivery service the next business day.</p>
 
 			<p>We will cook, package and deliver fresh delicious Indian food to your door (between 9am and 4pm).</p>
@@ -184,12 +185,16 @@ function HowItWorks({ setContent }: NavLinkProps) {
 function Faq({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
+			<h1>FAQ</h1>
+
 			<p className="question"><b>Can I try the food before signing up for the month?</b></p>
 			<p>YES! You can sign up for a day, a week (5 days) or a month (20 days). Just place your order <OrderNowLink setContent={setContent}>here</OrderNowLink>.</p>
 
 			<p className="question"><b>Can I pause my packages during my subscription?</b></p>
 
-			<p>NO, please note that you will not be able to pause or stop your packages once signing up. Skipping a delivery will not be accounted for regardless if you request a delivery be made or not.</p>  
+			<p>NO, please note that you will not be able to pause or stop your packages once signing up. Skipping a delivery will not be accounted for regardless if you request a delivery be made or not.</p>
+
+			<p className="question"><b>Who makes the food?</b></p>
 
 			<p>The food is made in a licensed commercial kitchen that`s professionally cleaned daily by food certified cooks & staff.</p> 
 
@@ -207,7 +212,17 @@ function Faq({ setContent }: NavLinkProps) {
 
 			<p>This is an incredibly important policy. We DO NOT go up to buildings under any circumstances. We will however give you a text and/or photo when your food is dropped in the lobby. We have a VERY limited time to do the deliveries and cannot change this policy. Please DO NOT WAIT to pick up your food in apartments or even houses, we do not take responsibility for lost or stolen packages. Make sure the food is microwaved or refrigerated as soon as possible.</p>
 
+			<p className="question"><b>Will the recipes change daily?</b></p>
+
 			<p>The food recipes are different everyday. We focus on quality & variety in the food so you don't get bored. We have over 25 different vegetarian recipes & numerous chicken recipes.</p> 
+
+			<p className="question"><b>Can I start in the middle of the month?</b></p>
+
+			<p>Yes, you can start in the middle of the week or the middle of the month. You are guaranteed 20 packages, just like anyone who would be starting in the beginning of the week or month. They will be delivered monday to friday, 5 times a week for four weeks, which makes a total of 20 packages.</p>
+
+			<p className="question"><b>Do you operate during holidays or bad weather?</b></p> 
+
+			<p>We have a <a href="https://chat.whatsapp.com/LFlKx7NGnrUL6CDKvYZ8Q9">WhatsApp</a> group where we update customers about major delays, holidays, and cancellations. We try our best to ensure deliveries happen everyday, but in cases of extreme weather we may need to cancel for the safety of our staff. In such a case, your end-day will be extended to make up for the lost packages.</p>
 		</div>
 	)
 }
@@ -215,6 +230,8 @@ function Faq({ setContent }: NavLinkProps) {
 function Contact() {
 	return (
 		<div className="text-block">
+			<h1>Contact</h1>
+
 			<p>Call <Phone/></p>
 
 			<p>We deliver Monday to Friday. 9am to 4pm if not earlier.</p>
