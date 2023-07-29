@@ -43,7 +43,7 @@ export default function App() {
 					FREE DELIVERY TO KITCHENER, WATERLOO, CAMBRIDGE & GUELPH
 				</div> */}
 			</div>
-			<header className="header">
+			<header>
 				<ShowNavButton/>
 				<img src={logo} className="logo" alt="" />
 				<nav>
@@ -142,21 +142,35 @@ function Home() {
 
 			<p>We offer incredibly affordable rates for fresh food that's cooked everyday before delivery.</p>
 
-			<p><b>Save time:</b> Time is the most valuable thing we have, and with our flat rate as low as $8 a day you can have more time for the important things in life.</p>
+			<p className="question"><b>Save time</b></p>
+
+			<p>Time is the most valuable thing we have, and with our flat rate as low as $8 a day you can have more time for the important things in life.</p>
 
 			<p>No more going to the store walking aimlessly to spend more money than you would on this service for your items just to expire before you get to use them. No more wasted hours shopping, prepping and cooking your food. Just heat and eat!</p>
 
-			<p><b>Save Money:</b> You can enjoy a nutritious meal without breaking bank or spending hours in the kitchen. Not only do you save more money by not paying for the rising costs of groceries due to “Inflation”, you create less food waste. You do not have to worry about items expiring that you paid way too much for, everything at KW Tiffin is made fresh right before the delivery and will last a few days in the fridge. Please refrigerate immediately and microwave when before consumption.</p>
+			<p className="question"><b>Save money</b></p>
 
-			<p><b>Healthy and fresh ingredients:</b> We use only the freshest ingredients to make our meals, so you can enjoy a healthy and flavorful meal every time.</p>
+			<p>You can enjoy a nutritious meal without breaking bank or spending hours in the kitchen. Not only do you save more money by not paying for the rising costs of groceries due to “Inflation”, you create less food waste. You do not have to worry about items expiring that you paid way too much for, everything at KW Tiffin is made fresh right before the delivery and will last a few days in the fridge. Please refrigerate immediately and microwave when before consumption.</p>
 
-			<p><b>Cooked Fresh & Safe:</b> A lot of similar services cook their food the night before and refrigerate overnight. We cook our food right before the deliveries in a commercial kitchen. Our chefs and food handlers are trained, authentic locals originating from India.</p>
+			<p className="question"><b>Healthy and fresh ingredients</b></p>
 
-			<p><b>Support Local:</b> Not only is a lot of the food local down to the locally sourced chicken, but so is the staff. Students, mothers, grandmothers in this community have built this operation.</p>
+			<p>We use only the freshest ingredients to make our meals, so you can enjoy a healthy and flavorful meal every time.</p>
 
-			<p><b>Variety of options:</b> Our menu is always changing, so you can enjoy a different meal every day and never get bored of repeated recipes. </p>
+			<p className="question"><b>Cooked Fresh & Safe</b></p>
 
-			<p><b>No waste:</b> With our service, you only receive the meals you need, so there's no need to worry about excess food going to waste.</p>
+			<p>A lot of similar services cook their food the night before and refrigerate overnight. We cook our food right before the deliveries in a commercial kitchen. Our chefs and food handlers are trained, authentic locals originating from India.</p>
+
+			<p className="question"><b>Support Local</b></p>
+
+			<p>Not only is a lot of the food local down to the locally sourced chicken, but so is the staff. Students, mothers, grandmothers in this community have built this operation.</p>
+
+			<p className="question"><b>Variety of options</b></p>
+
+			<p>Our menu is always changing, so you can enjoy a different meal every day and never get bored of repeated recipes. </p>
+
+			<p className="question"><b>No waste</b></p>
+
+			<p>With our service, you only receive the meals you need, so there's no need to worry about excess food going to waste.</p>
 		</div>
 	</>);
 }
@@ -168,7 +182,7 @@ function Menu() {
 function HowItWorks({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
-			<h1>How It Works</h1>
+			<h1 className="title">How It Works</h1>
 			<p>Once you make your payment, you will be set up with our food delivery service the next business day.</p>
 
 			<p>We will cook, package and deliver fresh delicious Indian food to your door (between 9am and 4pm).</p>
@@ -185,7 +199,7 @@ function HowItWorks({ setContent }: NavLinkProps) {
 function Faq({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
-			<h1>FAQ</h1>
+			<h1 className="title">FAQ</h1>
 
 			<p className="question"><b>Can I try the food before signing up for the month?</b></p>
 			<p>YES! You can sign up for a day, a week (5 days) or a month (20 days). Just place your order <OrderNowLink setContent={setContent}>here</OrderNowLink>.</p>
@@ -230,7 +244,7 @@ function Faq({ setContent }: NavLinkProps) {
 function Contact() {
 	return (
 		<div className="text-block">
-			<h1>Contact</h1>
+			<h1 className="title">Contact</h1>
 
 			<p>Call <Phone/></p>
 

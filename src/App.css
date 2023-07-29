@@ -45,29 +45,23 @@ Banner
 Header
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
-.header {
+header {
   background-color: white;
-  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: grey;
   box-shadow: 0 0.5px;
-}
+} 
 
 .logo {
-	width: 175px;
-	padding-top: 2%;
-	padding-bottom: 2%;
+	width: min(max(15%, 100px), 180px);
+	padding: max(2%, 15px) 0; /* top and bottom | left and right */
 }
 
 #show-navbar-button {
 	position: absolute;
 	left: 1px;
-	/* width: 40px;
-	height: 40px; */
 	font-size: 30px;
 	color: black;
 	background-color: transparent;
@@ -86,10 +80,9 @@ Header
 @media (min-width: 601px) {
 	nav {
 		display: flex;
-		width: 100% !important; /* Override animation close */
+		width: 100% !important; /* Must override animation */
 		max-width: 700px;
 		justify-content: space-evenly;
-		padding-top: 15px;
 		padding-bottom: 2%;
 	}
 	#show-navbar-button, #hide-navbar-button {
@@ -152,6 +145,10 @@ Content
   	margin-bottom: 3; /* line height between paragraphs */
 }
 
+.title {
+	color: lightgray;
+}
+
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Home 
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
@@ -180,9 +177,8 @@ Home
 
 .home-subheader {
 	background-color: black;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	position: relative; /* Needed for positioning absolute content (why?) */
+	overflow: hidden;
+	position: relative; /* Needed for positioning absolute content */
 	text-align: center;
 }
 
@@ -190,12 +186,11 @@ Home
 	/* duration | easing-function | delay | iteration | fille-mode | name */
 	animation: 1s ease-out 0s 1 forwards shrinkAndFadeIn;
 	max-width: 100%;
-	/* height: auto; */
 	display: block;
 }
 
 .home-subheader_content {
-	animation: 1s ease-out 0.8s 1 both riseAndFadeIn;
+	animation: 1.5s ease-out 0.8s 1 both riseAndFadeIn;
 	color: white;
 	position: absolute;
 	bottom: 0;
