@@ -142,17 +142,17 @@ function Home() {
 
 			<p>We offer incredibly affordable rates for fresh food that's cooked everyday before delivery.</p>
 
-			<p className="question"><b>Save time</b></p>
+			<p className="question"><b>Save Time</b></p>
 
 			<p>Time is the most valuable thing we have, and with our flat rate as low as $8 a day you can have more time for the important things in life.</p>
 
 			<p>No more going to the store walking aimlessly to spend more money than you would on this service for your items just to expire before you get to use them. No more wasted hours shopping, prepping and cooking your food. Just heat and eat!</p>
 
-			<p className="question"><b>Save money</b></p>
+			<p className="question"><b>Save Money</b></p>
 
 			<p>You can enjoy a nutritious meal without breaking bank or spending hours in the kitchen. Not only do you save more money by not paying for the rising costs of groceries due to “Inflation”, you create less food waste. You do not have to worry about items expiring that you paid way too much for, everything at KW Tiffin is made fresh right before the delivery and will last a few days in the fridge. Please refrigerate immediately and microwave when before consumption.</p>
 
-			<p className="question"><b>Healthy and fresh ingredients</b></p>
+			<p className="question"><b>Healthy & Fresh Ingredients</b></p>
 
 			<p>We use only the freshest ingredients to make our meals, so you can enjoy a healthy and flavorful meal every time.</p>
 
@@ -164,11 +164,11 @@ function Home() {
 
 			<p>Not only is a lot of the food local down to the locally sourced chicken, but so is the staff. Students, mothers, grandmothers in this community have built this operation.</p>
 
-			<p className="question"><b>Variety of options</b></p>
+			<p className="question"><b>Variety of Options</b></p>
 
 			<p>Our menu is always changing, so you can enjoy a different meal every day and never get bored of repeated recipes. </p>
 
-			<p className="question"><b>No waste</b></p>
+			<p className="question"><b>No Waste</b></p>
 
 			<p>With our service, you only receive the meals you need, so there's no need to worry about excess food going to waste.</p>
 		</div>
