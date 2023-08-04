@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./OrderNow.css";
 import meatIcon from "../images/Meat.png";
 import vegIcon from "../images/Leaf.png";
-import Phone from "./Phone";
+import { Phone } from "./ContactLinks";
 
 type TimeSpan = "month" | "week" | "day";
 const MONTH = "month";

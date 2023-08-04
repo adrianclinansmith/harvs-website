@@ -4,7 +4,7 @@ import homeImage from "./images/HomeBackground.png";
 import menuImage from "./images/Menu.png";
 import './App.css';
 import OrderNow from "./components/OrderNow";
-import Phone from "./components/Phone";
+import { Phone, WhatsApp } from "./components/ContactLinks";
 
 type PageTitle = "HOME" | "ORDER NOW" | "MENU" | "HOW IT WORKS" | "FAQ" | "CONTACT";
 const HOME = "HOME";
@@ -236,7 +236,7 @@ function Faq({ setContent }: NavLinkProps) {
 
 			<p className="question"><b>Do you operate during holidays or bad weather?</b></p> 
 
-			<p>We have a <a href="https://chat.whatsapp.com/LFlKx7NGnrUL6CDKvYZ8Q9">WhatsApp</a> group where we update customers about major delays, holidays, and cancellations. We try our best to ensure deliveries happen everyday, but in cases of extreme weather we may need to cancel for the safety of our staff. In such a case, your end-day will be extended to make up for the lost packages.</p>
+			<p>We have a <WhatsApp/> group where we update customers about major delays, holidays, and cancellations. We try our best to ensure deliveries happen everyday, but in cases of extreme weather we may need to cancel for the safety of our staff. In such a case, your end-day will be extended to make up for the lost packages.</p>
 		</div>
 	)
 }
@@ -247,6 +247,7 @@ function Contact() {
 			<h1 className="title">Contact</h1>
 
 			<p>Call <Phone/></p>
+			<p>Or join <WhatsApp/></p>
 
 			<p>We deliver Monday to Friday. 9am to 4pm if not earlier.</p>
 
