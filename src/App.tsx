@@ -55,6 +55,7 @@ export default function App() {
 					<NavLink setContent={setContent}>{FAQ}</NavLink>
 					<NavLink setContent={setContent}>{CONTACT}</NavLink>
 				</nav>
+				<p className="title">{content}</p>
 			</header>
 			<div className="content">
 				{
@@ -182,7 +183,6 @@ function Menu() {
 function HowItWorks({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
-			<h1 className="title">How It Works</h1>
 			<p>Once you make your payment, you will be set up with our food delivery service the next business day.</p>
 
 			<p>We will cook, package and deliver fresh delicious Indian food to your door (between 9am and 4pm).</p>
@@ -199,8 +199,6 @@ function HowItWorks({ setContent }: NavLinkProps) {
 function Faq({ setContent }: NavLinkProps) {
 	return (
 		<div className="text-block">
-			<h1 className="title">FAQ</h1>
-
 			<p className="question"><b>Can I try the food before signing up for the month?</b></p>
 			<p>YES! You can sign up for a day, a week (5 days) or a month (20 days). Just place your order <OrderNowLink setContent={setContent}>here</OrderNowLink>.</p>
 
@@ -244,8 +242,6 @@ function Faq({ setContent }: NavLinkProps) {
 function Contact() {
 	return (
 		<div className="text-block">
-			<h1 className="title">Contact</h1>
-
 			<p>Call <Phone/></p>
 			<p>Or join <WhatsApp/></p>
 
@@ -259,6 +255,15 @@ function Contact() {
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 // Helper Functions
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+function colorSelectedContentLink(content: PageTitle) {
+	const navLinkList = document.getElementsByClassName("nav-link");
+	for (let i = 0; i < navLinkList.length; i++) {
+		const navLink = navLinkList[i] as HTMLElement;
+		const selected = navLink.innerText === content;
+		navLink.style.color = selected ? "rgb(100, 150, 75)" : "black";
+	}
+}
 
 function showNavBar(show: boolean) {
 	const showNavButton = document.getElementById("show-navbar-button")!;
