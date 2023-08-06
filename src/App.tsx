@@ -241,10 +241,8 @@ function Contact() {
 		<div className="text-block">
 			<p>Call <Phone/></p>
 			<p>Or join <WhatsApp/></p>
-
 			<p>We deliver Monday to Friday. 9am to 4pm if not earlier.</p>
-
-			<p>They are delivered five times a week for four weeks (20 PACKAGES TOTAL)!!!!</p>
+			<p>We deliver five times a week for four weeks (20 PACKAGES TOTAL)!!!!</p>
 		</div>
 	)
 }
