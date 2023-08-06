@@ -115,15 +115,15 @@ header {
 	.logo {
 		padding-bottom: 0; /* Reduce padding between logo & title */
 	}
+	.home-subheader_content > h4 {
+		display: none; /* Too small on a little screen */
+	}
 }
 
 .nav-link {
-	/* flex: 1; */
 	font-size: 15px;
 	width: fit-content;
 	white-space: nowrap;
-	/* margin-left: 20px;
-	margin-right: 20px; */
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
@@ -146,6 +146,10 @@ Content
 .text-block > p {
 	line-height: 2;   /* line height within paragraph */
   	margin-bottom: 3; /* line height between paragraphs */
+}
+
+.order-now-link {
+	color: rgb(100, 150, 75);
 }
 
 /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
@@ -183,13 +187,14 @@ Home
 
 .home-subheader_image {
 	/* duration | easing-function | delay | iteration | fille-mode | name */
-	animation: 1s ease-out 0s 1 forwards shrinkAndFadeIn;
+	animation: 2.5s ease-out 0s 1 forwards shrinkAndFadeIn;
 	max-width: 100%;
 	display: block;
 }
 
 .home-subheader_content {
-	animation: 1.5s ease-out 0.8s 1 both riseAndFadeIn;
+	/* duration | easing-function | delay | iteration | fille-mode | name */
+	animation: 3s ease-out 0.5s 1 both riseAndFadeIn;
 	color: white;
 	position: absolute;
 	bottom: 0;
@@ -216,8 +221,8 @@ FAQ
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
 .question {
-	margin-top: 80px;
-	font-size: 30px;
+	/* margin-bottom: 80px; */
+	/* font-size: 30px; */
 	text-align: center;
 }
 

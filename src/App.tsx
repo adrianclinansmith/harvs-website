@@ -98,7 +98,9 @@ function NavLink({ children, setContent }: NavLinkProps) {
 function OrderNowLink({ children, setContent }: NavLinkProps) {
 	return (
 		// eslint-disable-next-line jsx-a11y/anchor-is-valid
-		<a href="#" onClick={ () => setContent(ORDER_NOW) }>
+		<a className="order-now-link" href="#" 
+			onClick={ () => setContent(ORDER_NOW) }
+		>
 			{children}
 		</a>
 	);
