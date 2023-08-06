@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './images/KwTiffinLogo.png';
 import homeImage from "./images/HomeBackground.png";
 import menuImage from "./images/Menu.png";
@@ -21,13 +21,10 @@ const CONTACT = "CONTACT";
 export default function App() {
 	// States
 	const [content, setContent] = useState<PageTitle>(HOME);
-	// Bold selected page link
-	const navLinkList = document.getElementsByClassName("nav-link");
-	for (let i = 0; i < navLinkList.length; i++) {
-		const navLink = navLinkList[i] as HTMLElement;
-		const selected = navLink.innerText === content;
-		navLink.style.textShadow = selected ? "0 0 0.5px black" : "none";
-	}
+	// Effects
+	useEffect(() => {
+		colorSelectedContentLink(content);
+	}, [content])
 	//JSX
 	return (
 		<div className="App">
@@ -109,7 +106,7 @@ function OrderNowLink({ children, setContent }: NavLinkProps) {
 
 function ShowNavButton() {
 	return (
-		<button id="show-navbar-button" onClick={_=> showNavBar(true)}>
+		<button id="show-navbar-button" onClick={ () => showNavBar(true) } >
 			≡
 		</button>
 	);
@@ -117,7 +114,7 @@ function ShowNavButton() {
 
 function HideNavButton() {
 	return (
-		<button id="hide-navbar-button" onClick={_=> showNavBar(false)}>
+		<button id="hide-navbar-button" onClick={ () => showNavBar(false) } >
 			✕
 		</button>
 	);
@@ -259,16 +256,14 @@ function Contact() {
 function colorSelectedContentLink(content: PageTitle) {
 	const navLinkList = document.getElementsByClassName("nav-link");
 	for (let i = 0; i < navLinkList.length; i++) {
-		const navLink = navLinkList[i] as HTMLElement;
-		const selected = navLink.innerText === content;
-		navLink.style.color = selected ? "rgb(100, 150, 75)" : "black";
+		const el = navLinkList[i] as HTMLElement;
+		el.style.color = el.innerText === content ? "rgb(100, 150, 75)" : "";
 	}
 }
 
 function showNavBar(show: boolean) {
-	const showNavButton = document.getElementById("show-navbar-button")!;
-	if (showNavButton.style.display === "none") {
-		return;
+	if (window.matchMedia("(min-width: 601px)").matches) {
+		return; /* navbar is row of buttons & won't be hidden */
 	}
 	const keyframes = [ {width: 0}, {width: "250px"} ];
 	const options: KeyframeAnimationOptions = {
