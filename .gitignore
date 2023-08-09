@@ -11,6 +11,9 @@
 # production
 /build
 
+# unused logos
+KwTiffinLogos
+
 # misc
 .DS_Store
 .env.local
