@@ -187,7 +187,7 @@ Home
 
 .home-subheader_image {
 	/* duration | easing-function | delay | iteration | fille-mode | name */
-	animation: 2.5s ease-out 0s 1 forwards shrinkAndFadeIn;
+	animation: 3.5s ease-out 0s 1 forwards shrinkAndFadeIn;
 	max-width: 100%;
 	display: block;
 }
