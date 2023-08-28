@@ -129,7 +129,12 @@ function HideNavButton() {
 function Home() {
 	return (<>
 		<div className="home-subheader">
-			<img className="home-subheader_image" src={homeImage} alt="" />
+			<img 
+				className="home-subheader_image"
+				alt="" 
+				decoding="async" 
+				src={homeImage}  
+			/>
 			<div className="home-subheader_content">
 				<h4>Home-style, Traditional, Delicious</h4>
 				<h1>
